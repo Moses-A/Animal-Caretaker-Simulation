@@ -1,0 +1,191 @@
+//Elephant Caretaker
+//Simulates caring for a virtual pet
+//Author is Moses Arocha
+
+#include <iostream>
+#include <string>
+#include <cstdlib>
+#include <ctime>
+
+using namespace std;
+
+class Elephant
+{
+public:
+	Elephant(int hunger, int boredom, int health, int stress, int sleep, int intelligence);
+	void Story(int Random, string RandomWeather);
+	void Eat(int food = 20);
+	void Interact(int fun = 20);
+	void Speak();
+	void Sleep();
+	void Train();
+	string Weather(string RandomWeather, int Weather);
+
+private:
+	int m_Hunger;
+	int m_Boredom;
+	int m_Health;
+	int m_Stress;
+	int m_Sleep;
+	int m_Intelligence;
+
+	int GetMood(int Random = 6);
+	void PassTime(int time = 1);
+};
+
+Elephant::Elephant(int hunger, int boredom, int health, int stress, int sleep, int intelligence):
+	m_Hunger(hunger),
+	m_Boredom(boredom),
+	m_Health(health),
+	m_Stress(stress),
+	m_Sleep(sleep),
+	m_Intelligence(intelligence)
+{}
+
+ int Elephant::GetMood(int Random)
+{
+	srand(static_cast<unsigned int>(time(0)));  //seed random number generator
+
+	 Random = rand() % 20 + 1;         // random number between 1 and 10
+	
+	 return (Random);
+}
+
+void Elephant::PassTime(int time)
+{
+	m_Hunger += time;
+	m_Boredom += time;
+	m_Stress += time;
+	m_Sleep += time;
+}
+
+string Elephant::Weather(string RandomWeather, int Weather)
+{
+	srand(static_cast<unsigned int>(time(0)));  //seed random number generator
+
+	 Weather = rand() % 5 + 1;         // random number between 1 and 10
+
+	 if (Weather == 1)
+	 {
+		 RandomWeather = "Cloudy";
+	 }
+	 else if (Weather == 2)
+	 {
+		 RandomWeather = "Sunny";
+	 }
+	 else if (Weather == 3)
+	 {
+		 RandomWeather = "Snowy";
+	 }
+	 else if (Weather == 4)
+	 {
+		 RandomWeather = "Rainy";
+	 }
+	 else if (Weather == 5)
+	 {
+		 RandomWeather = "Windy";
+	 }
+
+	 return (RandomWeather);
+}
+
+void Elephant::Story(int Random, string RandomWeather)
+{
+	string Continue;
+	string Walk;
+	int mood = GetMood(Random);
+
+	if (mood > 15)
+	{
+        cout << "Angry.\n";
+	}
+    else if (mood > 10)
+	{
+        cout << "Tired.\n";
+	}
+    else if (mood > 5)
+	{
+        cout << "Stressed.\n";
+	}
+    else
+	{
+        cout << "Depressed.\n";
+	}
+		
+
+	cout << " Hello! I Am The Former Care Taker Of The Elephants At The Safari.\n"
+		 << " Good Luck. They Are A Hassle. Everyday They Need Two Baths,\n"
+		 << " To Be Feed 35 Pounds Of Found Each, And 9 Hours Of Sleep.\n"
+		 << " I Hope You Are Up For The Challenge. \n\tDo You Want To Continue? [Y/N]";
+	getline(cin, Continue);
+
+	cout << "\n\n Well Anyways, The Game Will Continue! Hurry!\n";
+
+	cout << "\n Here! Take This! It's A Tranquilizer. Approach Charlize Slowly!\n"
+		 << " She Seems Very " << mood << "\n\t Oh No! Shoot Her With It Already!\n"
+		 << "\t Press Enter To Shoot Charlize.\n";
+	cin.ignore();
+	cin.get();
+
+	cout << "\n Okay Great. She Is Safe Now, Please Pet Her.\n"
+		<< "\t Press Enter To Pet Charlize.\n";
+	cin.ignore();
+	cin.get();
+
+	PassTime();
+
+	cout << "\n Amazing. Sounds Like She Is Happy, Take Her For A Walk.\n"
+		 << "\n As You Take Charlize For A Walk, She Gets Scared.\n"
+		 << "\n A Mouse Was On The Road. She Ran Away, Chase Her!\n";
+
+	for (int i = 0; i < 3; ++i)
+		{
+		cin.ignore();
+		cin.get();
+		}
+
+	cout << "\n Oh Thank Goodness, You Caught Her! Please, Walk Her Back.\n"
+		 << "\n As You Walked Her Back To The Zoo, She Gets Tired.\n"
+		 << "\n She Decides To Sit Down. Please, Take Her Back To The Zoo Now.\n";
+	cout << " Please Type Walk To Back To The Zoo. ";
+	cin >> Walk;
+
+	PassTime();
+
+	cout << " As You Enter The Zoo, She Begins To Speak To You.\n";
+	cout << " 'Hey, I'm Charlize.' - Charlize The Elephant\n"
+		 << " Scared You Run Away And Never Come Back.\n\n";
+
+
+}
+
+void Elephant::Eat(int food)
+{
+	char Feed;
+
+	m_Hunger -= food;
+	cout << "\n As You Walk Over To Charlize, She Seems Hungry. So You Give Her Some Food.\n"
+		 << " She Thanks You By Letting You Touch Her Trunk.\n"
+		 << " Would You Like To Feed Her Again? [Y/N] ";
+	cin >> Feed;
+
+	Feed = toupper(Feed);
+
+	if (Feed == 'Y')
+	{
+		cout << " Great Charlize Has Been Fed! She Loves You More Now.\n";
+		m_Hunger -= food;
+	}
+	else
+	{
+		cout << " She Gave You A Dirty Look. This Is Not A Good Sign.\n";
+	}
+
+	PassTime();
+
+
+}
+
+void Elephant::
+
+	
