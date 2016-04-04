@@ -3,7 +3,6 @@
 //Author is Moses Arocha
 
 #include <iostream>
-#include <windows.h>
 #include <string>
 #include <algorithm>
 #include <stdio.h>
@@ -15,17 +14,6 @@
 
 using namespace std;
 
-//returns the current attributes
-WORD GetConsoleTextAttribute (HANDLE hCon)
-{
-  CONSOLE_SCREEN_BUFFER_INFO con_info;
-  GetConsoleScreenBufferInfo(hCon, &con_info);
-  return con_info.wAttributes;
-}
-
-HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-const int saved_colors = GetConsoleTextAttribute(hConsole);
-
 class Elephant
 {
 public:
@@ -34,7 +22,7 @@ public:
 	void Eat(int food = 20);
 	void Interact(int fun = 20);
 	void Speak(int Random);
-	void Sleep();
+	void Nap();
 	void Train(int iq = 5);
 	string Weather(string RandomWeather, int Weather);
 
@@ -129,7 +117,6 @@ void Elephant::Story(int Random, string RandomWeather)
         cout << "Depressed.\n";
 	}
 		
-	Sleep(150);
 	cout << " Hello! I Am The Former Care Taker Of The Elephants At The Safari.\n"
 		 << " Good Luck. They Are A Hassle. Everyday They Need Two Baths,\n"
 		 << " To Be Feed 35 Pounds Of Found Each, And 9 Hours Of Sleep.\n"
@@ -139,7 +126,6 @@ void Elephant::Story(int Random, string RandomWeather)
 
 	cout << "\n\n Well Anyways, The Game Will Continue! Hurry!\n";
 
-	Sleep(150);
 	cout << "\n Here! Take This! It's A Tranquilizer. Approach Charlize Slowly!\n"
 		 << " She Seems Very " << mood << "\n\t Oh No! Shoot Her With It Already!\n"
 		 << "\t Press Enter To Shoot Charlize.\n";
@@ -154,7 +140,6 @@ void Elephant::Story(int Random, string RandomWeather)
 
 	PassTime();
 
-	Sleep(150);
 	cout << "\n Amazing. Sounds Like She Is Happy, Take Her For A Walk.\n"
 		 << "\n As You Take Charlize For A Walk, She Gets Scared.\n"
 		 << "\n A Mouse Was On The Road. She Ran Away, Chase Her!\n";
@@ -175,10 +160,9 @@ void Elephant::Story(int Random, string RandomWeather)
 	PassTime();
 
 	cout << " As You Enter The Zoo, She Begins To Speak To You.\n";
-	Sleep(150);
 	cout << " 'Hey, I'm Charlize.' - Charlize The Elephant\n"
 		 << " Scared You Run Away And Never Come Back.\n\n";
-	Sleep(150);
+		 
 	cout << " To This Day You Wonder What Ever Happend To Charlize.\n"
 		 << " Today Is The Day You Are Going To Visit Her, After 15 Years.\n"
 		 << " Nervous, You Stumble Through The Zoo Towards Her Cage.\n"
@@ -187,7 +171,6 @@ void Elephant::Story(int Random, string RandomWeather)
 		 << " As She Strolls Towards You A Smile Spreads Across Your Face,\n"
 		 << " You Waited Years For This To Happen, You Have Missed Her...\n";
 	cout << "\n\n Press Enter To Continue...";
-	Sleep(150);
 
 	cin.ignore();
 	cin.get();
@@ -274,7 +257,7 @@ void Elephant::Interact(int fun)
 
 	cout << " Yay! Let's Play A Game!\n\n";
 
-	m_Boredom -=fun;
+	m_Boredom -= fun;
 	if (m_Boredom < 0)
 	{
 		m_boredom = 0;
@@ -297,7 +280,7 @@ void Elephant::Interact(int fun)
 
 }
 
-void Elephant::Sleep()
+void Elephant::Nap()
 {
 	PassTime();
 	int hours;
@@ -336,7 +319,7 @@ void Elephant::Train(int iq)
 
 	while (repeat == 'Y')
 	{
-		if (choice.length < 4)
+		if (choice.length() < 4)
 		{
 			cout << " Please Enter A Trick You Would Like To Teach Charlize:\n\t";
 			getline(cin, trick);
@@ -392,7 +375,7 @@ int main()
 			break;
 		
 		case 1:
-			eleph.Sleep();
+			eleph.Nap();
 			break;
 
 		case 2:
