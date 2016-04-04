@@ -3,11 +3,28 @@
 //Author is Moses Arocha
 
 #include <iostream>
+#include <windows.h>
 #include <string>
+#include <algorithm>
+#include <stdio.h>
+#include <ctype.h>
+#include <vector>
 #include <cstdlib>
 #include <ctime>
+#include<fstream>
 
 using namespace std;
+
+//returns the current attributes
+WORD GetConsoleTextAttribute (HANDLE hCon)
+{
+  CONSOLE_SCREEN_BUFFER_INFO con_info;
+  GetConsoleScreenBufferInfo(hCon, &con_info);
+  return con_info.wAttributes;
+}
+
+HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+const int saved_colors = GetConsoleTextAttribute(hConsole);
 
 class Elephant
 {
@@ -16,7 +33,7 @@ public:
 	void Story(int Random, string RandomWeather);
 	void Eat(int food = 20);
 	void Interact(int fun = 20);
-	void Speak();
+	void Speak(int Random);
 	void Sleep();
 	void Train();
 	string Weather(string RandomWeather, int Weather);
@@ -112,18 +129,21 @@ void Elephant::Story(int Random, string RandomWeather)
         cout << "Depressed.\n";
 	}
 		
-
+	Sleep(150);
 	cout << " Hello! I Am The Former Care Taker Of The Elephants At The Safari.\n"
 		 << " Good Luck. They Are A Hassle. Everyday They Need Two Baths,\n"
 		 << " To Be Feed 35 Pounds Of Found Each, And 9 Hours Of Sleep.\n"
 		 << " I Hope You Are Up For The Challenge. \n\tDo You Want To Continue? [Y/N]";
+	
 	getline(cin, Continue);
 
 	cout << "\n\n Well Anyways, The Game Will Continue! Hurry!\n";
 
+	Sleep(150);
 	cout << "\n Here! Take This! It's A Tranquilizer. Approach Charlize Slowly!\n"
 		 << " She Seems Very " << mood << "\n\t Oh No! Shoot Her With It Already!\n"
 		 << "\t Press Enter To Shoot Charlize.\n";
+	
 	cin.ignore();
 	cin.get();
 
@@ -134,9 +154,11 @@ void Elephant::Story(int Random, string RandomWeather)
 
 	PassTime();
 
+	Sleep(150);
 	cout << "\n Amazing. Sounds Like She Is Happy, Take Her For A Walk.\n"
 		 << "\n As You Take Charlize For A Walk, She Gets Scared.\n"
 		 << "\n A Mouse Was On The Road. She Ran Away, Chase Her!\n";
+	
 
 	for (int i = 0; i < 3; ++i)
 		{
@@ -153,8 +175,24 @@ void Elephant::Story(int Random, string RandomWeather)
 	PassTime();
 
 	cout << " As You Enter The Zoo, She Begins To Speak To You.\n";
+	Sleep(150);
 	cout << " 'Hey, I'm Charlize.' - Charlize The Elephant\n"
 		 << " Scared You Run Away And Never Come Back.\n\n";
+	Sleep(150);
+	cout << " To This Day You Wonder What Ever Happend To Charlize.\n"
+		 << " Today Is The Day You Are Going To Visit Her, After 15 Years.\n"
+		 << " Nervous, You Stumble Through The Zoo Towards Her Cage.\n"
+		 << " It's Not The Same As You Remember, You Wish You Hadn't Left.\n"
+		 << " As You Walk To Her Cage, She Instantly Recongizes You.\n"
+		 << " As She Strolls Towards You A Smile Spreads Across Your Face,\n"
+		 << " You Waited Years For This To Happen, You Have Missed Her...\n";
+	cout << "\n\n Press Enter To Continue...";
+	Sleep(150);
+
+	cin.ignore();
+	cin.get();
+
+	PassTime();
 
 
 }
@@ -186,6 +224,129 @@ void Elephant::Eat(int food)
 
 }
 
-void Elephant::
+void Elephant::Speak(int Random)
+{
+	int mood = GetMood(Random);
+	string discuss;
+
+	if (mood > 15)
+	{
+        cout << "Frustrated.\n";
+	}
+    else if (mood > 10)
+	{
+        cout << "Happy.\n";
+	}
+    else if (mood > 5)
+	{
+        cout << "Well.\n";
+	}
+    else
+	{
+        cout << "Fulfilled.\n";
+	}
+
+	cout << " I Am Charlize, I Have A Great Life! ";
+	cout << " I Am Very " << mood;
+	cout << " Thankfully, I Have A Caring CareTaker, Who Always Talks To Me.\n";
+	cout << " What Do You Want To Talk About?? Oh, How About Peanuts!\n";
+	cout << " Please Insert What You Would Like To Discuss: ";
+	getline(cin, discuss);
+
+	if (discuss.length() < 5)
+	{
+		cout << " I Would Love To Talk About That!\n";
+	}
+	else
+	{
+		cout << " Ehh, Alright I Guess. K.\n";
+	}
+
+	cout << "Well I Have To Leave Now, So Goodbye!\n\n";
+
+	PassTime();
+
+}
+
+void Elephant::Interact(int fun)
+{
+	string game;
+
+	cout << " Yay! Let's Play A Game!\n\n";
+
+	m_Boredom -=fun;
+	if (m_Boredom < 0)
+	{
+		m_boredom = 0;
+	}
+
+	cout << " Oooh, What Game Would You Like To Play!?!\n"
+		 << " Choose A Game You Would Like To Play: Hide And Seek or Fetch \n";
+	getline (cin, game);
+
+	if (game.length() < 4)
+	{
+		cout << " Yes! Let's Play!" << endl;
+	}
+	else
+	{
+		cout << " Oh My Gosh Yes! Let's Play!" << endl;
+	}
+
+	PassTime();
+
+}
+
+void Elephant::Sleep()
+{
+	PassTime();
+	int hours;
+
+	cout << " It Seems That Charlize Has Fallen Asleep.\n"
+		 << " In Order For The Game To Continue, She Must Sleep.\n"
+		 << " Press Enter For Her To Sleep Safely.\n";
+
+	for (int i = 0; i < 16; ++i)
+		{
+		++hours;
+		cin.ignore();
+		cin.get();
+		cout << "\t" << hours <<" Hours Has Gone By...\n";
+		}
+
+	cout << " Amazingly, She Has Awoken! Great!\n";
+	cout << " Everyday, She Needs 16 Hours Of Sleep, So Make Sure You Come Back!\n";
+	cout << " If You Don't She Will Cry And Run Away!\n";
+
+	PassTime();
+}
+
+void Elephant::Train()
+{
+	vector<string> Tricks;
+	vector<string> Words;
+
+	string choice;
+	string trick;
+	string word;
+
+	cout << " What Would You Like To Teach Charlize? [Tricks Or Words]\n\t";
+	getline(cin, choice);
+
+	if (choice.length < 4)
+	{
+		cout << " Please Enter A Trick You Would Like To Teach Charlize:\n\t";
+		getline(cin, trick);
+
+		Tricks.push_back(trick);
+	}
+	else
+	{
+		cout << " Please Enter A Word You Would Like To Teach Charlize:\n\t";
+		getline(cin, word);
+
+		Words.push_back(word);
+	}
 
 	
+}
