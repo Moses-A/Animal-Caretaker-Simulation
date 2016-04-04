@@ -35,7 +35,7 @@ public:
 	void Interact(int fun = 20);
 	void Speak(int Random);
 	void Sleep();
-	void Train();
+	void Train(int iq = 5);
 	string Weather(string RandomWeather, int Weather);
 
 private:
@@ -321,7 +321,7 @@ void Elephant::Sleep()
 	PassTime();
 }
 
-void Elephant::Train()
+void Elephant::Train(int iq)
 {
 	vector<string> Tricks;
 	vector<string> Words;
@@ -329,24 +329,98 @@ void Elephant::Train()
 	string choice;
 	string trick;
 	string word;
+	char repeat;
 
 	cout << " What Would You Like To Teach Charlize? [Tricks Or Words]\n\t";
 	getline(cin, choice);
 
-	if (choice.length < 4)
+	while (repeat == 'Y')
 	{
-		cout << " Please Enter A Trick You Would Like To Teach Charlize:\n\t";
-		getline(cin, trick);
+		if (choice.length < 4)
+		{
+			cout << " Please Enter A Trick You Would Like To Teach Charlize:\n\t";
+			getline(cin, trick);
+			m_Intelligence += iq;
+			Tricks.push_back(trick);
+		}
+		else
+		{
+			cout << " Please Enter A Word You Would Like To Teach Charlize:\n\t";
+			getline(cin, word);
+			m_Intelligence += iq;
+			Words.push_back(word);
+		}
 
-		Tricks.push_back(trick);
-	}
-	else
-	{
-		cout << " Please Enter A Word You Would Like To Teach Charlize:\n\t";
-		getline(cin, word);
+		
 
-		Words.push_back(word);
+		cout << " Would You Like To Teach Charlize More Things?! [Y/N]";
+		cin >> repeat;
+
+		toupper(repeat);
+
+		PassTime();
+
 	}
 
 	
+}
+
+int main()
+{
+	Elephant eleph;
+
+	int choice = 1;
+
+	while(choice !=0)
+	{
+		cout << "\n The Elephant Game! The Game Where You Care For An Elephant!\n\n";
+		cout << " 0 - Exit\n";
+		cout << " 1 - Let Your Elephant Sleep.\n";
+		cout << " 2 - Let Your Elephant Eat.\n";
+		cout << " 3 - Let Your Elephant Learn.\n";
+		cout << " 4 - Let Your Elephant Speak.\n";
+		cout << " 5 - Let Your Elephant Play!\n";
+
+		cout << "What Would You Like To Do? : ";
+		cin >> choice;
+
+		switch (choice)
+		{
+		case 0:
+			cout << " Whatever, You Killed Charlize! Come Again!\n";
+			cout << "\n\n The Secret Code is 0630\n\n";
+			break;
+		
+		case 1:
+			eleph.Sleep();
+			break;
+
+		case 2:
+			eleph.Eat();
+			break;
+
+		case 3:
+			eleph.Train();
+			break;
+
+		case 4: 
+			eleph.Speak();
+			break;
+
+		case 5:
+			eleph.Interact();
+			break;
+
+		case 0630:
+			eleph.Story();
+			break;
+
+		default:
+			cout << "\n Wow, Genius, Wrong Input. " << choice << " is not proper.\n\n";
+			
+		}
+
+	}
+
+	return 0;
 }
