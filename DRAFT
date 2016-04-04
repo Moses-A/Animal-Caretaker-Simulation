@@ -29,12 +29,12 @@ const int saved_colors = GetConsoleTextAttribute(hConsole);
 class Elephant
 {
 public:
-	Elephant(int hunger, int boredom, int health, int stress, int sleep, int intelligence);
+	Elephant(int hunger = 5, int boredom = 5, int health = 100, int stress = 10, int sleep = 7, int intelligence= 20);
 	void Story(int Random, string RandomWeather);
 	void Eat(int food = 20);
 	void Interact(int fun = 20);
 	void Speak(int Random);
-	void Sleep();
+	void Nap();
 	void Train(int iq = 5);
 	string Weather(string RandomWeather, int Weather);
 
@@ -130,7 +130,7 @@ void Elephant::Story(int Random, string RandomWeather)
 	}
 		
 	Sleep(150);
-	cout << " Hello! I Am The Former Care Taker Of The Elephants At The Safari.\n"
+	cout << "\n\n Hello! I Am The Former Care Taker Of The Elephants At The Safari.\n"
 		 << " Good Luck. They Are A Hassle. Everyday They Need Two Baths,\n"
 		 << " To Be Feed 35 Pounds Of Found Each, And 9 Hours Of Sleep.\n"
 		 << " I Hope You Are Up For The Challenge. \n\tDo You Want To Continue? [Y/N]";
@@ -202,7 +202,7 @@ void Elephant::Eat(int food)
 	char Feed;
 
 	m_Hunger -= food;
-	cout << "\n As You Walk Over To Charlize, She Seems Hungry. So You Give Her Some Food.\n"
+	cout << "\n\n As You Walk Over To Charlize, She Seems Hungry. So You Give Her Some Food.\n"
 		 << " She Thanks You By Letting You Touch Her Trunk.\n"
 		 << " Would You Like To Feed Her Again? [Y/N] ";
 	cin >> Feed;
@@ -211,13 +211,16 @@ void Elephant::Eat(int food)
 
 	if (Feed == 'Y')
 	{
-		cout << " Great Charlize Has Been Fed! She Loves You More Now.\n";
+		cout << "\n Great Charlize Has Been Fed! She Loves You More Now.\n";
 		m_Hunger -= food;
 	}
 	else
 	{
-		cout << " She Gave You A Dirty Look. This Is Not A Good Sign.\n";
+		cout << "\n She Gave You A Dirty Look. This Is Not A Good Sign.\n";
 	}
+
+	cin.ignore();
+	cin.get();
 
 	PassTime();
 
@@ -226,43 +229,46 @@ void Elephant::Eat(int food)
 
 void Elephant::Speak(int Random)
 {
-	int mood = GetMood(Random);
+	int MoodNum = GetMood(Random);
+	string mood;
 	string discuss;
 
-	if (mood > 15)
+	if (MoodNum > 15)
 	{
-        cout << "Frustrated.\n";
+        mood = "Fustrated";
 	}
-    else if (mood > 10)
+    else if (MoodNum > 10)
 	{
-        cout << "Happy.\n";
+        mood = "Happy";
 	}
-    else if (mood > 5)
+    else if (MoodNum > 5)
 	{
-        cout << "Well.\n";
+        mood = "Depressed";
 	}
     else
 	{
-        cout << "Fulfilled.\n";
+        mood = "Cheerful";
 	}
 
-	cout << " I Am Charlize, I Have A Great Life! ";
-	cout << " I Am Very " << mood;
-	cout << " Thankfully, I Have A Caring CareTaker, Who Always Talks To Me.\n";
+	Sleep(550);
+	cout << "\n\n I Am Charlize, I Have An Interesting Life! ";
+	cout << " I Am Very " << mood; cin.ignore();
+	cout << ". \n Thankfully, I Have A Caring CareTaker, Who Always Talks To Me.\n";
 	cout << " What Do You Want To Talk About?? Oh, How About Peanuts!\n";
-	cout << " Please Insert What You Would Like To Discuss: ";
+	cout << "\n Please Insert What You Would Like To Discuss: ";
 	getline(cin, discuss);
 
 	if (discuss.length() < 5)
 	{
-		cout << " I Would Love To Talk About That!\n";
+		cout << "\n I Would Love To Talk About That!\n";
 	}
 	else
 	{
-		cout << " Ehh, Alright I Guess. K.\n";
+		cout << "\n Ehh, Alright I Guess. K.\n";
 	}
 
-	cout << "Well I Have To Leave Now, So Goodbye!\n\n";
+	cout << " \n\t Well I Have To Leave Now, So Goodbye!\n\n";
+	cin.get();
 
 	PassTime();
 
@@ -272,13 +278,15 @@ void Elephant::Interact(int fun)
 {
 	string game;
 
-	cout << " Yay! Let's Play A Game!\n\n";
+	cout << "\n\n Yay! Let's Play A Game!\n\n";
 
 	m_Boredom -=fun;
 	if (m_Boredom < 0)
 	{
-		m_boredom = 0;
+		m_Boredom = 0;
 	}
+
+	cin.ignore();
 
 	cout << " Oooh, What Game Would You Like To Play!?!\n"
 		 << " Choose A Game You Would Like To Play: Hide And Seek or Fetch \n";
@@ -286,23 +294,25 @@ void Elephant::Interact(int fun)
 
 	if (game.length() < 4)
 	{
-		cout << " Yes! Let's Play!" << endl;
+		cout << "\n\n\t Yes! Let's Play!" << endl;
 	}
 	else
 	{
-		cout << " Oh My Gosh Yes! Let's Play!" << endl;
+		cout << "\n\n\t Oh My Gosh Yes! Let's Play!" << endl;
 	}
+
+	cin.get();
 
 	PassTime();
 
 }
 
-void Elephant::Sleep()
+void Elephant::Nap()
 {
 	PassTime();
-	int hours;
+	int hours = 0;
 
-	cout << " It Seems That Charlize Has Fallen Asleep.\n"
+	cout << "\n\n It Seems That Charlize Has Fallen Asleep.\n"
 		 << " In Order For The Game To Continue, She Must Sleep.\n"
 		 << " Press Enter For Her To Sleep Safely.\n";
 
@@ -314,9 +324,10 @@ void Elephant::Sleep()
 		cout << "\t" << hours <<" Hours Has Gone By...\n";
 		}
 
-	cout << " Amazingly, She Has Awoken! Great!\n";
+	cout << "\n\n Amazingly, She Has Awoken! Great!\n";
 	cout << " Everyday, She Needs 16 Hours Of Sleep, So Make Sure You Come Back!\n";
 	cout << " If You Don't She Will Cry And Run Away!\n";
+	cin.get();
 
 	PassTime();
 }
@@ -329,23 +340,26 @@ void Elephant::Train(int iq)
 	string choice;
 	string trick;
 	string word;
-	char repeat;
+	char repeat = 'Y';
 
-	cout << " What Would You Like To Teach Charlize? [Tricks Or Words]\n\t";
+	cin.ignore();
+	cout << "\n\n What Would You Like To Teach Charlize? [Tricks Or Words]\n\t";
 	getline(cin, choice);
 
-	while (repeat == 'Y')
+	while (repeat == 'Y' || repeat == 'y')
 	{
-		if (choice.length < 4)
+		if (choice.length() > 5)
 		{
-			cout << " Please Enter A Trick You Would Like To Teach Charlize:\n\t";
+			cin.ignore();
+			cout << "\n Please Enter A Trick You Would Like To Teach Charlize:\n\t";
 			getline(cin, trick);
 			m_Intelligence += iq;
 			Tricks.push_back(trick);
 		}
 		else
 		{
-			cout << " Please Enter A Word You Would Like To Teach Charlize:\n\t";
+			cin.ignore();
+			cout << "\n Please Enter A Word You Would Like To Teach Charlize:\n\t";
 			getline(cin, word);
 			m_Intelligence += iq;
 			Words.push_back(word);
@@ -353,19 +367,18 @@ void Elephant::Train(int iq)
 
 		
 
-		cout << " Would You Like To Teach Charlize More Things?! [Y/N]";
+		cout << "\n\n Would You Like To Teach Charlize More Things?! [Y/N] ";
 		cin >> repeat;
 
-		toupper(repeat);
 
 		PassTime();
 
 	}
-
+	cin.get();
 	
 }
 
-int main()
+int main(int Random, string RandomWeather)
 {
 	Elephant eleph;
 
@@ -381,42 +394,52 @@ int main()
 		cout << " 4 - Let Your Elephant Speak.\n";
 		cout << " 5 - Let Your Elephant Play!\n";
 
-		cout << "What Would You Like To Do? : ";
+		cout << "\n\t\tWhat Would You Like To Do? : ";
 		cin >> choice;
 
 		switch (choice)
 		{
 		case 0:
-			cout << " Whatever, You Killed Charlize! Come Again!\n";
-			cout << "\n\n The Secret Code is 0630\n\n";
+			cout << "\n Whatever, You Killed Charlize! Come Again!\n";
+			cout << "\n\n The Secret Code is 630\n\n";
+			cin.ignore();
+			cin.get();
+			system("cls");
 			break;
 		
 		case 1:
-			eleph.Sleep();
+			eleph.Nap();
+			system("cls");
 			break;
 
 		case 2:
 			eleph.Eat();
+			system("cls");
 			break;
 
 		case 3:
 			eleph.Train();
+			system("cls");
 			break;
 
 		case 4: 
-			eleph.Speak();
+			eleph.Speak(Random);
+			system("cls");
 			break;
 
 		case 5:
 			eleph.Interact();
+			system("cls");
 			break;
 
-		case 0630:
-			eleph.Story();
+		case 630:
+			eleph.Story(Random, RandomWeather);
+			system("cls");
 			break;
 
 		default:
 			cout << "\n Wow, Genius, Wrong Input. " << choice << " is not proper.\n\n";
+			//system("cls");
 			
 		}
 
