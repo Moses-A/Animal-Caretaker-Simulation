@@ -11,7 +11,8 @@
 #include <vector>
 #include <cstdlib>
 #include <ctime>
-#include<fstream>
+#include <fstream>
+#include <sstream>
 
 using namespace std;
 
@@ -30,12 +31,18 @@ class Elephant
 {
 public:
 	Elephant(int hunger = 5, int boredom = 5, int health = 100, int stress = 10, int sleep = 7, int intelligence= 20);
-	void Story(int Random, string RandomWeather);
+	void Story(int Random);
 	void Eat(int food = 20);
 	void Interact(int fun = 20);
 	void Speak(int Random);
 	void Nap();
 	void Train(int iq = 5);
+	int GetHunger();
+	int GetBoredom();
+	int GetHealth();
+	int GetStress();
+	int GetSleep();
+	int GetIntelligence();
 	string Weather(string RandomWeather, int Weather);
 
 private:
@@ -68,6 +75,36 @@ Elephant::Elephant(int hunger, int boredom, int health, int stress, int sleep, i
 	 return (Random);
 }
 
+int Elephant::GetHunger()
+{
+	return (m_Hunger);
+}
+
+int Elephant::GetBoredom()
+{
+	return (m_Boredom);
+}
+
+int Elephant::GetHealth()
+{
+	return (m_Health);
+}
+
+int Elephant::GetStress()
+{
+	return (m_Stress);
+}
+
+int Elephant::GetSleep()
+{
+	return (m_Sleep);
+}
+
+int Elephant::GetIntelligence()
+{
+	return (m_Intelligence);
+}
+
 void Elephant::PassTime(int time)
 {
 	m_Hunger += time;
@@ -76,8 +113,13 @@ void Elephant::PassTime(int time)
 	m_Sleep += time;
 }
 
-string Elephant::Weather(string RandomWeather, int Weather)
+ void Elephant::Story(int Random)
 {
+	string RandomWeather;
+	int Weather;
+	string Continue;
+	string Walk;
+
 	srand(static_cast<unsigned int>(time(0)));  //seed random number generator
 
 	 Weather = rand() % 5 + 1;         // random number between 1 and 10
@@ -102,38 +144,38 @@ string Elephant::Weather(string RandomWeather, int Weather)
 	 {
 		 RandomWeather = "Windy";
 	 }
+	 else
+	 {
+		 RandomWeather = "Stormy";
+	 }
 
-	 return (RandomWeather);
-}
-
-void Elephant::Story(int Random, string RandomWeather)
-{
-	string Continue;
-	string Walk;
+	
 	int mood = GetMood(Random);
+	string WordMood;
 
 	if (mood > 15)
 	{
-        cout << "Angry.\n";
+        WordMood = "Angry";
 	}
-    else if (mood > 10)
+	else if (mood > 10)
 	{
-        cout << "Tired.\n";
+        WordMood = "Tired";
 	}
     else if (mood > 5)
 	{
-        cout << "Stressed.\n";
+        WordMood = "Stressed";
 	}
     else
 	{
-        cout << "Depressed.\n";
+        WordMood = "Depressed";
 	}
-		
+	
+	cin.ignore();
 	Sleep(150);
 	cout << "\n\n Hello! I Am The Former Care Taker Of The Elephants At The Safari.\n"
 		 << " Good Luck. They Are A Hassle. Everyday They Need Two Baths,\n"
 		 << " To Be Feed 35 Pounds Of Found Each, And 9 Hours Of Sleep.\n"
-		 << " I Hope You Are Up For The Challenge. \n\tDo You Want To Continue? [Y/N]";
+		 << " I Hope You Are Up For The Challenge. \n\tDo You Want To Continue? [Y/N] ";
 	
 	getline(cin, Continue);
 
@@ -141,7 +183,7 @@ void Elephant::Story(int Random, string RandomWeather)
 
 	Sleep(150);
 	cout << "\n Here! Take This! It's A Tranquilizer. Approach Charlize Slowly!\n"
-		 << " She Seems Very " << mood << "\n\t Oh No! Shoot Her With It Already!\n"
+		 << " She Seems Very " << WordMood << " Oh No! Shoot Her With It Already!\n"
 		 << "\t Press Enter To Shoot Charlize.\n";
 	
 	cin.ignore();
@@ -156,8 +198,8 @@ void Elephant::Story(int Random, string RandomWeather)
 
 	Sleep(150);
 	cout << "\n Amazing. Sounds Like She Is Happy, Take Her For A Walk.\n"
-		 << "\n As You Take Charlize For A Walk, She Gets Scared.\n"
-		 << "\n A Mouse Was On The Road. She Ran Away, Chase Her!\n";
+		 << " As You Take Charlize For A Walk, She Gets Scared.\n"
+		 << " A Mouse Was On The Road. She Ran Away, Chase Her!\n";
 	
 
 	for (int i = 0; i < 3; ++i)
@@ -169,7 +211,7 @@ void Elephant::Story(int Random, string RandomWeather)
 	cout << "\n Oh Thank Goodness, You Caught Her! Please, Walk Her Back.\n"
 		 << "\n As You Walked Her Back To The Zoo, She Gets Tired.\n"
 		 << "\n She Decides To Sit Down. Please, Take Her Back To The Zoo Now.\n";
-	cout << " Please Type Walk To Back To The Zoo. ";
+	cout << " Please Type Walk To Walk Back To The Zoo. ";
 	cin >> Walk;
 
 	PassTime();
@@ -193,7 +235,6 @@ void Elephant::Story(int Random, string RandomWeather)
 	cin.get();
 
 	PassTime();
-
 
 }
 
@@ -250,7 +291,7 @@ void Elephant::Speak(int Random)
         mood = "Cheerful";
 	}
 
-	Sleep(550);
+	//Sleep(550);
 	cout << "\n\n I Am Charlize, I Have An Interesting Life! ";
 	cout << " I Am Very " << mood; cin.ignore();
 	cout << ". \n Thankfully, I Have A Caring CareTaker, Who Always Talks To Me.\n";
@@ -314,12 +355,11 @@ void Elephant::Nap()
 
 	cout << "\n\n It Seems That Charlize Has Fallen Asleep.\n"
 		 << " In Order For The Game To Continue, She Must Sleep.\n"
-		 << " Press Enter For Her To Sleep Safely.\n";
+		 << " Press Enter For Her To Sleep Safely.\n\n";
 
 	for (int i = 0; i < 16; ++i)
 		{
 		++hours;
-		cin.ignore();
 		cin.get();
 		cout << "\t" << hours <<" Hours Has Gone By...\n";
 		}
@@ -386,7 +426,7 @@ int main(int Random, string RandomWeather)
 
 	while(choice !=0)
 	{
-		cout << "\n The Elephant Game! The Game Where You Care For An Elephant!\n\n";
+		cout << "\n\t The Elephant Game! The Game Where You Care For An Elephant!\n\n";
 		cout << " 0 - Exit\n";
 		cout << " 1 - Let Your Elephant Sleep.\n";
 		cout << " 2 - Let Your Elephant Eat.\n";
@@ -400,7 +440,14 @@ int main(int Random, string RandomWeather)
 		switch (choice)
 		{
 		case 0:
-			cout << "\n Whatever, You Killed Charlize! Come Again!\n";
+			cout << "\n\n\t The Statics of Charlize Can Be Found Below.\n";
+			cout << "\n Boredom Level Is A " <<eleph.GetBoredom() << " Out Of 10." << endl;
+			cout << "\n Health Level Is A " << eleph.GetHealth() << " Out Of 100." << endl;
+			cout << "\n Hunger Level Is A " << eleph.GetHunger() <<  " Out of 10. " << endl;
+			cout << "\n Intelligence Level Is A " << eleph.GetIntelligence() << " Out of 200. " <<endl;
+			cout << "\n Sleep Level Is A " << eleph.GetSleep() << " Out of 15." << endl;
+			cout << "\n Stress Level Is A " << eleph.GetStress() << " Out of 20.\n\n\n";
+			cout << "\n\n Whatever, You Killed Charlize! Come Again!\n";
 			cout << "\n\n The Secret Code is 630\n\n";
 			cin.ignore();
 			cin.get();
@@ -432,14 +479,23 @@ int main(int Random, string RandomWeather)
 			system("cls");
 			break;
 
+		case 6:
+			cout << "\n\n\t The Statics of Charlize Can Be Found Below.\n";
+			cout << "\n Boredom Level Is A " <<eleph.GetBoredom() << " Out Of 10." << endl;
+			cout << "\n Health Level Is A " << eleph.GetHealth() << " Out Of 100." << endl;
+			cout << "\n Hunger Level Is A " << eleph.GetHunger() <<  " Out of 10. " << endl;
+			cout << "\n Intelligence Level Is A " << eleph.GetIntelligence() << " Out of 200. " <<endl;
+			cout << "\n Sleep Level Is A " << eleph.GetSleep() << " Out of 15." << endl;
+			cout << "\n Stress Level Is A " << eleph.GetStress() << " Out of 20.\n\n\n";
+			break;
+
 		case 630:
-			eleph.Story(Random, RandomWeather);
+			eleph.Story(Random);
 			system("cls");
 			break;
 
 		default:
 			cout << "\n Wow, Genius, Wrong Input. " << choice << " is not proper.\n\n";
-			//system("cls");
 			
 		}
 
