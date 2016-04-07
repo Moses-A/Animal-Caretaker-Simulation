@@ -1,4 +1,4 @@
-//Elephant Caretaker
+//Animals Caretaker
 //Simulates caring for a virtual pet
 //Author is Moses Arocha
 
@@ -27,16 +27,17 @@ WORD GetConsoleTextAttribute (HANDLE hCon)
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 const int saved_colors = GetConsoleTextAttribute(hConsole);
 
-class Elephant
+class Animals
 {
 public:
-	Elephant(int hunger = 5, int boredom = 5, int health = 100, int stress = 10, int sleep = 7, int intelligence= 20);
+	Animals(int hunger = 5, int boredom = 5, int health = 100, int stress = 10, int sleep = 7, int intelligence= 20);
 	void Story(int Random);
 	void Eat(int food = 20);
 	void Interact(int fun = 20);
 	void Speak(int Random);
 	void Nap();
 	void Train(int iq = 5);
+	void Welcome();
 	int GetHunger();
 	int GetBoredom();
 	int GetHealth();
@@ -57,7 +58,7 @@ private:
 	void PassTime(int time = 1);
 };
 
-Elephant::Elephant(int hunger, int boredom, int health, int stress, int sleep, int intelligence):
+Animals::Animals(int hunger, int boredom, int health, int stress, int sleep, int intelligence):
 	m_Hunger(hunger),
 	m_Boredom(boredom),
 	m_Health(health),
@@ -66,7 +67,7 @@ Elephant::Elephant(int hunger, int boredom, int health, int stress, int sleep, i
 	m_Intelligence(intelligence)
 {}
 
- int Elephant::GetMood(int Random)
+ int Animals::GetMood(int Random)
 {
 	srand(static_cast<unsigned int>(time(0)));  //seed random number generator
 
@@ -75,37 +76,37 @@ Elephant::Elephant(int hunger, int boredom, int health, int stress, int sleep, i
 	 return (Random);
 }
 
-int Elephant::GetHunger()
+int Animals::GetHunger()
 {
 	return (m_Hunger);
 }
 
-int Elephant::GetBoredom()
+int Animals::GetBoredom()
 {
 	return (m_Boredom);
 }
 
-int Elephant::GetHealth()
+int Animals::GetHealth()
 {
 	return (m_Health);
 }
 
-int Elephant::GetStress()
+int Animals::GetStress()
 {
 	return (m_Stress);
 }
 
-int Elephant::GetSleep()
+int Animals::GetSleep()
 {
 	return (m_Sleep);
 }
 
-int Elephant::GetIntelligence()
+int Animals::GetIntelligence()
 {
 	return (m_Intelligence);
 }
 
-void Elephant::PassTime(int time)
+void Animals::PassTime(int time)
 {
 	m_Hunger += time;
 	m_Boredom += time;
@@ -113,7 +114,7 @@ void Elephant::PassTime(int time)
 	m_Sleep += time;
 }
 
- void Elephant::Story(int Random)
+ void Animals::Story(int Random)
 {
 	string RandomWeather;
 	int Weather;
@@ -218,7 +219,7 @@ void Elephant::PassTime(int time)
 
 	cout << " As You Enter The Zoo, She Begins To Speak To You.\n";
 	Sleep(150);
-	cout << " 'Hey, I'm Charlize.' - Charlize The Elephant\n"
+	cout << " 'Hey, I'm Charlize.' - Charlize The Animals\n"
 		 << " Scared You Run Away And Never Come Back.\n\n";
 	Sleep(150);
 	cout << " To This Day You Wonder What Ever Happend To Charlize.\n"
@@ -238,7 +239,7 @@ void Elephant::PassTime(int time)
 
 }
 
-void Elephant::Eat(int food)
+void Animals::Eat(int food)
 {
 	char Feed;
 
@@ -254,6 +255,7 @@ void Elephant::Eat(int food)
 	{
 		cout << "\n Great Charlize Has Been Fed! She Loves You More Now.\n";
 		m_Hunger -= food;
+		m_Hunger -= food;
 	}
 	else
 	{
@@ -268,7 +270,7 @@ void Elephant::Eat(int food)
 
 }
 
-void Elephant::Speak(int Random)
+void Animals::Speak(int Random)
 {
 	int MoodNum = GetMood(Random);
 	string mood;
@@ -291,7 +293,7 @@ void Elephant::Speak(int Random)
         mood = "Cheerful";
 	}
 
-	//Sleep(550);
+	Sleep(550);
 	cout << "\n\n I Am Charlize, I Have An Interesting Life! ";
 	cout << " I Am Very " << mood; cin.ignore();
 	cout << ". \n Thankfully, I Have A Caring CareTaker, Who Always Talks To Me.\n";
@@ -315,7 +317,7 @@ void Elephant::Speak(int Random)
 
 }
 
-void Elephant::Interact(int fun)
+void Animals::Interact(int fun)
 {
 	string game;
 
@@ -348,7 +350,7 @@ void Elephant::Interact(int fun)
 
 }
 
-void Elephant::Nap()
+void Animals::Nap()
 {
 	PassTime();
 	int hours = 0;
@@ -372,7 +374,7 @@ void Elephant::Nap()
 	PassTime();
 }
 
-void Elephant::Train(int iq)
+void Animals::Train(int iq)
 {
 	vector<string> Tricks;
 	vector<string> Words;
@@ -418,21 +420,114 @@ void Elephant::Train(int iq)
 	
 }
 
+void Animals::Welcome()
+{
+	string type;
+	int level = 1;
+
+	cout << " From Moses Arocha, \n To Matthew,\n\n Greetings! \n\n I Hope You Are Having A Wonderful Day. I Am Glad To See You Back.\n"
+		 << " I Know, It's Been A While. Well, To Begin, This Is Charlize.\n"
+		 << " Here You Will Be The CareTaker. What Type Of CareTaker Would You Like To Be?\n";
+	cout << "\n Please Insert One Of The Three Below: [Nice, Magical, Evil] ";
+	getline(cin, type);
+
+	if (type == "NICE" || type == "Nice" || type == "nice")
+	{
+		cout << "\n\t Great! You Will Be A Nice CareTaker!\n";
+	}
+	else if (type.length() > 4)
+	{
+		cout << "\n\t I Hope Everything Turns Out Well...\n";
+	}
+	else if (type == "EVIL" || type == "evil" || type == "Evil")
+	{
+		cout << "\n\t This Does Not Seem Like A Great Sign...\n";
+	}
+	else
+	{
+		cout << "\n\t You Chose Wrong. You Get To Be Nice!\n";
+	}
+
+	Sleep(1550);
+	cout << "\n\n What Level Of Difficulty Do You Wish To Play The Game?\n\n";
+	cout << " 1 - Easy\n";
+	cout << " 2 - Medium\n";
+	cout << " 3 - Veteran\n";
+
+
+	cout << "\n\t\tWhat Would You Like To Do? : ";
+		cin >> level;
+
+	switch (level)
+	{
+	case 1:
+		cout << "\n\n Great, The Rules Of The Game Are Simple. DO NOT KILL CHARLIZE!\n";
+		cout << "\n\n\t The Statics of Charlize Can Be Found Below.\n";
+
+		cout << "\n Boredom Level Is A " << GetBoredom() << " Out Of 10." << endl;
+		cout << "\n Health Level Is A " << GetHealth() << " Out Of 100." << endl;
+		cout << "\n Hunger Level Is A " << GetHunger() <<  " Out of 10. " << endl;
+		cout << "\n Intelligence Level Is A " << GetIntelligence() << " Out of 200. " <<endl;
+		cout << "\n Sleep Level Is A " << GetSleep() << " Out of 15." << endl;
+		cout << "\n Stress Level Is A " << GetStress() << " Out of 20.\n\n\n";
+		break;
+
+	case 2:
+		cout << "\n\n Amazing! Moving Up In The World. The Rules Of The Game Are Simple.\n"
+			 << " Everyday, You Must Feed Charlize, Bath Her, And Let Her Sleep. It Is\n"
+			 << " It Is Recommended To Let Her Sleep And Relax.\n\n";
+		PassTime();
+
+		cout << "\n Boredom Level Is A " << GetBoredom() << " Out Of 10." << endl;
+		cout << "\n Health Level Is A " << GetHealth() << " Out Of 100." << endl;
+		cout << "\n Hunger Level Is A " << GetHunger() <<  " Out of 10. " << endl;
+		cout << "\n Intelligence Level Is A " << GetIntelligence() << " Out of 200. " <<endl;
+		cout << "\n Sleep Level Is A " << GetSleep() << " Out of 15." << endl;
+		cout << "\n Stress Level Is A " << GetStress() << " Out of 20.\n\n\n";
+		break;
+
+	case 3:
+		cout << "\n\n You Are A Veteran. Great. Good Luck.\n";
+		PassTime();
+		PassTime();
+		PassTime();
+		PassTime();
+		cout << "\n Boredom Level Is A " << GetBoredom() << " Out Of 10." << endl;
+		cout << "\n Health Level Is A " << GetHealth() << " Out Of 100." << endl;
+		cout << "\n Hunger Level Is A " << GetHunger() <<  " Out of 10. " << endl;
+		cout << "\n Intelligence Level Is A " << GetIntelligence() << " Out of 200. " <<endl;
+		cout << "\n Sleep Level Is A " << GetSleep() << " Out of 15." << endl;
+		cout << "\n Stress Level Is A " << GetStress() << " Out of 20.\n\n\n";
+		break;
+	}
+}
+
 int main(int Random, string RandomWeather)
 {
-	Elephant eleph;
+	Animals crit;
 
 	int choice = 1;
+	string animalCaring;
+
+	crit.Welcome();
+
+	Sleep(5567);
+	cin.ignore();
+	cout << "\n\n\t Welcome To The Safari Game! The Game Where You Care For An Animal!\n\n";
+	cout << "\n What Species Of An Animal Would You Like To Care For? : ";
+	getline (cin, animalCaring);
+
+	cout << "\n\n Sounds Great! Well Here Are Your Choices! Choose Wisely!\n\n";
 
 	while(choice !=0)
 	{
-		cout << "\n\t The Elephant Game! The Game Where You Care For An Elephant!\n\n";
-		cout << " 0 - Exit\n";
-		cout << " 1 - Let Your Elephant Sleep.\n";
-		cout << " 2 - Let Your Elephant Eat.\n";
-		cout << " 3 - Let Your Elephant Learn.\n";
-		cout << " 4 - Let Your Elephant Speak.\n";
-		cout << " 5 - Let Your Elephant Play!\n";
+
+		cout << "\n\t 0 - Exit\n";
+		cout << "\t 1 - Let Your " << animalCaring << "  Sleep.\n";
+		cout << "\t 2 - Let Your " << animalCaring << "  Eat.\n";
+		cout << "\t 3 - Let Your " << animalCaring << "  Learn.\n";
+		cout << "\t 4 - Let Your " << animalCaring << "  Speak.\n";
+		cout << "\t 5 - Let Your " << animalCaring << "  Play!\n";
 
 		cout << "\n\t\tWhat Would You Like To Do? : ";
 		cin >> choice;
@@ -441,12 +536,12 @@ int main(int Random, string RandomWeather)
 		{
 		case 0:
 			cout << "\n\n\t The Statics of Charlize Can Be Found Below.\n";
-			cout << "\n Boredom Level Is A " <<eleph.GetBoredom() << " Out Of 10." << endl;
-			cout << "\n Health Level Is A " << eleph.GetHealth() << " Out Of 100." << endl;
-			cout << "\n Hunger Level Is A " << eleph.GetHunger() <<  " Out of 10. " << endl;
-			cout << "\n Intelligence Level Is A " << eleph.GetIntelligence() << " Out of 200. " <<endl;
-			cout << "\n Sleep Level Is A " << eleph.GetSleep() << " Out of 15." << endl;
-			cout << "\n Stress Level Is A " << eleph.GetStress() << " Out of 20.\n\n\n";
+			cout << "\n Boredom Level Is A " << crit.GetBoredom() << " Out Of 10." << endl;
+			cout << "\n Health Level Is A " << crit.GetHealth() << " Out Of 100." << endl;
+			cout << "\n Hunger Level Is A " << crit.GetHunger() <<  " Out of 10. " << endl;
+			cout << "\n Intelligence Level Is A " << crit.GetIntelligence() << " Out of 200. " <<endl;
+			cout << "\n Sleep Level Is A " << crit.GetSleep() << " Out of 15." << endl;
+			cout << "\n Stress Level Is A " << crit.GetStress() << " Out of 20.\n\n\n";
 			cout << "\n\n Whatever, You Killed Charlize! Come Again!\n";
 			cout << "\n\n The Secret Code is 630\n\n";
 			cin.ignore();
@@ -455,42 +550,42 @@ int main(int Random, string RandomWeather)
 			break;
 		
 		case 1:
-			eleph.Nap();
+			crit.Nap();
 			system("cls");
 			break;
 
 		case 2:
-			eleph.Eat();
+			crit.Eat();
 			system("cls");
 			break;
 
 		case 3:
-			eleph.Train();
+			crit.Train();
 			system("cls");
 			break;
 
 		case 4: 
-			eleph.Speak(Random);
+			crit.Speak(Random);
 			system("cls");
 			break;
 
 		case 5:
-			eleph.Interact();
+			crit.Interact();
 			system("cls");
 			break;
 
 		case 6:
 			cout << "\n\n\t The Statics of Charlize Can Be Found Below.\n";
-			cout << "\n Boredom Level Is A " <<eleph.GetBoredom() << " Out Of 10." << endl;
-			cout << "\n Health Level Is A " << eleph.GetHealth() << " Out Of 100." << endl;
-			cout << "\n Hunger Level Is A " << eleph.GetHunger() <<  " Out of 10. " << endl;
-			cout << "\n Intelligence Level Is A " << eleph.GetIntelligence() << " Out of 200. " <<endl;
-			cout << "\n Sleep Level Is A " << eleph.GetSleep() << " Out of 15." << endl;
-			cout << "\n Stress Level Is A " << eleph.GetStress() << " Out of 20.\n\n\n";
+			cout << "\n Boredom Level Is A " << crit.GetBoredom() << " Out Of 10." << endl;
+			cout << "\n Health Level Is A " << crit.GetHealth() << " Out Of 100." << endl;
+			cout << "\n Hunger Level Is A " << crit.GetHunger() <<  " Out of 10. " << endl;
+			cout << "\n Intelligence Level Is A " << crit.GetIntelligence() << " Out of 200. " <<endl;
+			cout << "\n Sleep Level Is A " << crit.GetSleep() << " Out of 15." << endl;
+			cout << "\n Stress Level Is A " << crit.GetStress() << " Out of 20.\n\n\n";
 			break;
 
 		case 630:
-			eleph.Story(Random);
+			crit.Story(Random);
 			system("cls");
 			break;
 
