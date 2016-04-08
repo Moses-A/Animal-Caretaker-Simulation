@@ -176,7 +176,7 @@ void Animals::PassTime(int time)
 	Sleep(150);
 	cout << "\n\n Hello! \n\n I Am The Former Care Taker Of The Elephants At The Safari.\n"
 		 << " Good Luck. They Are A Hassle. Everyday They Need Two Baths,\n"
-		 << " To Be Feed 35 Pounds Of Found Each, And 9 Hours Of Sleep.\n\n"
+		 << " To Be Fed 35 Pounds Of Food Each, And 9 Hours Of Sleep.\n\n"
 		 << " I Hope You Are Up For The Challenge. Do You Want To Continue? [Y/N] ";
 	
 	getline(cin, Continue);
