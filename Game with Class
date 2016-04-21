@@ -27,6 +27,7 @@ WORD GetConsoleTextAttribute (HANDLE hCon)
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 const int saved_colors = GetConsoleTextAttribute(hConsole);
 
+int choice = 1;
 
 //Creation of The Class Animals
 class Animals
@@ -41,6 +42,7 @@ public:
 	void Nap(); // also known as sleep in some codes
 	void Train(int iq = 5);
 	void Welcome();
+	void Kill();
 	int GetHunger();
 	int GetBoredom();
 	int GetHealth();
@@ -124,6 +126,36 @@ void Animals::PassTime(int time)
 	m_Stress += time;
 	m_Sleep += time;
 	m_Health -= time;
+}
+
+// function that kills the critter
+void Animals::Kill()
+{
+	if (m_Hunger == 10)
+	{
+		cout << "\n You Have Lost The Game. Charlize Died. GoodBye." << endl;
+		choice = 0;
+	}
+	else if (m_Boredom == 10)
+	{
+		cout << "\n You Have Lost The Game. Charlize Ran Away. GoodBye." << endl;
+		choice = 0;
+	}
+	else if (m_Stress == 20)
+	{
+		cout << "\n You Have Lost The Game. Charlize Died. GoodBye." << endl;
+		choice = 0;
+	}
+	else if (m_Sleep == 15)
+	{
+		cout << "\n You have Lost The Game. Charlize Died. Goodbye." << endl;
+		choice = 0;
+	}
+	else if (m_Health == 0)
+	{
+		cout << "\n You Have Lost The Game. Charlize Died. Goodbye." << endl;
+		choice = 0;
+	}
 }
 
 // A hidden feature only found by using the case number 630
@@ -387,13 +419,22 @@ void Animals::Interact(int fun)
 
 	// if statement that declares that m_Boredom cannot drop below 0 or rise over 10
 	if (m_Boredom < 0)
-	{
-		m_Boredom = 0;
-	}
+		{
+			m_Boredom = 0;
+		}
 	else if (m_Boredom > 10)
-	{
-		m_Boredom = 10;
-	}
+		{
+			m_Boredom = 10;
+		}
+
+	if (m_Stress < 0)
+		{
+			m_Stress = 0;
+		}
+	else if (m_Stress > 20)
+		{
+			m_Stress = 20;
+		}
 
 	cin.ignore();
 
@@ -410,6 +451,8 @@ void Animals::Interact(int fun)
 	{
 		cout << "\n\n\t Oh My Gosh Yes! Let's Play!" << endl;
 	}
+
+	cout << "\n You Play With Charlize For A Few Hours. She Loves You.\n Which Is Great, Because Before, She Hated You. HAHA.\n\n";
 
 	//may need cin.ignore(); if attempted > 1
 	cin.get();
@@ -545,58 +588,83 @@ void Animals::Welcome()
 	cout << "\n\t\tWhat Would You Like To Do? : ";
 		cin >> level;
 
-	switch (level) // level is defined in the previous line from user-input
-	{
-	case 1:
-		cout << "\n\n Great, The Rules Of The Game Are Simple. DO NOT KILL CHARLIZE!\n";
-		cout << "\n\n\t The Statics of Charlize Can Be Found Below.\n";
+		if ((!cin) || ((cin !=0) &&
+					(level != 1) && (level != 2) &&
+				    (level != 3) ))
+				{
+					level = 0;
+					cout << "\n You Have Lost The Game Already, Great. \n";
+					cin.ignore();
+					cin.get();
+				}
 
-		/* here is the section where Get's are used to grab private variables and make them
-		   viewable to the user, the class the user edits and defines does not exist, this
-		   does not alther the class, just presents the info*/
-		cout << "\n Boredom Level Is A " << GetBoredom() << " Out Of 10." << endl;
-		cout << "\n Health Level Is A " << GetHealth() << " Out Of 100." << endl;
-		cout << "\n Hunger Level Is A " << GetHunger() <<  " Out of 10. " << endl;
-		cout << "\n Intelligence Level Is A " << GetIntelligence() << " Out of 200. " <<endl;
-		cout << "\n Sleep Level Is A " << GetSleep() << " Out of 15." << endl;
-		cout << "\n Stress Level Is A " << GetStress() << " Out of 20.\n\n\n";
-		break; // from break, it sends straight to the main
 
-	case 2:
-		cout << "\n\n Amazing! Moving Up In The World. The Rules Of The Game Are Simple.\n"
-			 << " Everyday, You Must Feed Charlize, Bath Her, And Let Her Sleep. It Is\n"
-			 << " It Is Recommended To Let Her Sleep And Relax.\n\n";
-		PassTime();
+		switch (level) // level is defined in the previous line from user-input
+		{
+		case 1:
+			cout << "\n\n Great, The Rules Of The Game Are Simple. DO NOT KILL CHARLIZE!\n"
+				 << " Everyday The Statics Will Increase, Once They Reach The Max, \n\t\t Charlize Will Die.\n\n";
+			cout << "\n\t The Statics of Charlize Can Be Found Below.\n";
 
-		cout << "\n Boredom Level Is A " << GetBoredom() << " Out Of 10." << endl;
-		cout << "\n Health Level Is A " << GetHealth() << " Out Of 100." << endl;
-		cout << "\n Hunger Level Is A " << GetHunger() <<  " Out of 10. " << endl;
-		cout << "\n Intelligence Level Is A " << GetIntelligence() << " Out of 200. " <<endl;
-		cout << "\n Sleep Level Is A " << GetSleep() << " Out of 15." << endl;
-		cout << "\n Stress Level Is A " << GetStress() << " Out of 20.\n\n\n";
-		break; // from break, it sends straight to the main
+			/* here is the section where Get's are used to grab private variables and make them
+			   viewable to the user, the class the user edits and defines does not exist, this
+			   does not alther the class, just presents the info*/
+			cout << "\n Boredom Level Is A " << GetBoredom() << " Out Of 10." << endl;
+			cout << "\n Health Level Is A " << GetHealth() << " Out Of 100." << endl;
+			cout << "\n Hunger Level Is A " << GetHunger() <<  " Out of 10. " << endl;
+			cout << "\n Intelligence Level Is A " << GetIntelligence() << " Out of 200. " <<endl;
+			cout << "\n Sleep Level Is A " << GetSleep() << " Out of 15." << endl;
+			cout << "\n Stress Level Is A " << GetStress() << " Out of 20.\n\n\n";
+			
+			cout << "\n\n\t\t Please Read The Above.\n\n";
+			break; // from break, it sends straight to the main
 
-	case 3:
-		cout << "\n\n You Are A Veteran. Great. Good Luck.\n";
-		PassTime(); // harder the level, the harder the game is made in the beginning
-		PassTime();
-		PassTime();
-		PassTime();
-		cout << "\n Boredom Level Is A " << GetBoredom() << " Out Of 10." << endl;
-		cout << "\n Health Level Is A " << GetHealth() << " Out Of 100." << endl;
-		cout << "\n Hunger Level Is A " << GetHunger() <<  " Out of 10. " << endl;
-		cout << "\n Intelligence Level Is A " << GetIntelligence() << " Out of 200. " <<endl;
-		cout << "\n Sleep Level Is A " << GetSleep() << " Out of 15." << endl;
-		cout << "\n Stress Level Is A " << GetStress() << " Out of 20.\n\n\n";
-		break; // from break, it sends straight to the main
-	}
+		case 2:
+			cout << "\n\n Amazing! Moving Up In The World. The Rules Of The Game Are Simple.\n"
+				 << " Everyday, You Must Feed Charlize, Bath Her, And Let Her Sleep. It Is\n"
+				 << " It Is Recommended To Let Her Sleep And Relax.\n"
+				 << " Everyday The Statics Will Increase, Once They Reach The Max,\n\t\t Charlize Will Die.\n\n";
+			PassTime();
+
+			cout << "\n Boredom Level Is A " << GetBoredom() << " Out Of 10." << endl;
+			cout << "\n Health Level Is A " << GetHealth() << " Out Of 100." << endl;
+			cout << "\n Hunger Level Is A " << GetHunger() <<  " Out of 10. " << endl;
+			cout << "\n Intelligence Level Is A " << GetIntelligence() << " Out of 200. " <<endl;
+			cout << "\n Sleep Level Is A " << GetSleep() << " Out of 15." << endl;
+			cout << "\n Stress Level Is A " << GetStress() << " Out of 20.\n\n\n";
+			
+			cout << "\n\n\t\t Please Read The Above.\n\n";
+			break; // from break, it sends straight to the main
+
+		case 3:
+			cout << "\n\n\t\t You Are A Veteran. Great. Good Luck.\n";
+			PassTime(); // harder the level, the harder the game is made in the beginning
+			PassTime();
+			PassTime();
+			PassTime();
+			cout << "\n Boredom Level Is A " << GetBoredom() << " Out Of 10." << endl;
+			cout << "\n Health Level Is A " << GetHealth() << " Out Of 100." << endl;
+			cout << "\n Hunger Level Is A " << GetHunger() <<  " Out of 10. " << endl;
+			cout << "\n Intelligence Level Is A " << GetIntelligence() << " Out of 200. " <<endl;
+			cout << "\n Sleep Level Is A " << GetSleep() << " Out of 15." << endl;
+			cout << "\n Stress Level Is A " << GetStress() << " Out of 20.\n\n\n";
+			
+			cout << "\n\n\t\t Please Read The Above.\n\n";
+			break; // from break, it sends straight to the main
+
+		default:
+			SetConsoleTextAttribute(hConsole, 0x0C); // the color of red
+			cout << "\n Wow, Genius, Wrong Input. " << level << " is not proper.\n\n";
+			SetConsoleTextAttribute(hConsole, saved_colors); // returns the colors to black and white
+		}
 }
 
 int main(int Random, string RandomWeather)
 {
+	int fail = 1;
+	
 	Animals crit; // creation of the class section crit from the class Animals, where user edits
-
-	int choice = 1;
+	
 	string animalCaring;
 
 	SetConsoleTextAttribute(hConsole, 0x08); // the color dark grey
@@ -608,34 +676,49 @@ int main(int Random, string RandomWeather)
 	Sleep(5567);
 
 	cin.ignore(); // A MANDATORY line needed for get to be processed
-	cout << "\n\n\t Welcome To The Safari Game! The Game Where You Care For An Animal!\n\n";
+	cout << "\n\n  Welcome To The Safari Game! The Game Where You Care For An Animal!\n\n";
 	cout << "\n What Species Of An Animal Would You Like To Care For? : ";
 	getline (cin, animalCaring);
 
-	
+		while(choice !=0) // as soon as choice equals zero it will release
+		{
+			
 
-	while(choice !=0) // as soon as choice equals zero it will release
-	{
-		SetConsoleTextAttribute(hConsole, 0x04); // the color dark red
-		cout << "\n\n Sounds Great! Well Here Are Your Choices! Choose Wisely!\n\n";
-		cout << "\n\t 0 - Exit\n";
-		cout << "\t 1 - Let Your " << animalCaring << "  Sleep.\n";
-		cout << "\t 2 - Let Your " << animalCaring << "  Eat.\n";
-		cout << "\t 3 - Let Your " << animalCaring << "  Learn.\n";
-		cout << "\t 4 - Let Your " << animalCaring << "  Speak.\n";
-		cout << "\t 5 - Let Your " << animalCaring << "  Play!\n";
+				SetConsoleTextAttribute(hConsole, 0x04); // the color dark red
+				cout << "\n\n Sounds Great! Well Here Are Your Choices! Choose Wisely!\n\n";
+				cout << "\n\t 0 - Exit\n";
+				cout << "\t 1 - Let Your " << animalCaring << "  Sleep.\n";
+				cout << "\t 2 - Let Your " << animalCaring << "  Eat.\n";
+				cout << "\t 3 - Let Your " << animalCaring << "  Learn.\n";
+				cout << "\t 4 - Let Your " << animalCaring << "  Speak.\n";
+				cout << "\t 5 - Let Your " << animalCaring << "  Play!\n";
 
-		SetConsoleTextAttribute(hConsole, 0x07); // the color dark blue
-		cout << "\n\t\tWhat Would You Like To Do? : ";
-		cin >> choice;
+				SetConsoleTextAttribute(hConsole, 0x07); // the color dark blue
+				cout << "\n\t\tWhat Would You Like To Do? : ";
+				cin >> choice;
 
+				
+				if ((!cin) || ((cin !=0) &&
+					(choice != 1) && (choice != 2) &&
+				    (choice != 3) && (choice != 4) &&
+				    (choice != 5) && (choice != 6) &&
+					(choice != 630) ))
+				{
+					choice = 0;
+					cout << "\n You Have Lost The Game Already, Great. \n";
+					cin.ignore();
+					cin.get();
+				}
+
+		crit.Kill();
+							
 		switch (choice) // same variable as while loop
 		{
 		case 0:
 			SetConsoleTextAttribute(hConsole, 0x08); //  the color dark grey
 			/* here the class section crit is created from the class Animals, 
-			   this is where the user will edit the information, so here is the modified
-			   information that will be provided to the user*/
+				this is where the user will edit the information, so here is the modified
+				information that will be provided to the user*/
 			cout << "\n\n\t The Statics of Charlize Can Be Found Below.\n";
 			cout << "\n Boredom Level Is A " << crit.GetBoredom() << " Out Of 10." << endl;
 			cout << "\n Health Level Is A " << crit.GetHealth() << " Out Of 100." << endl;
@@ -714,7 +797,7 @@ int main(int Random, string RandomWeather)
 			SetConsoleTextAttribute(hConsole, saved_colors); // returns the colors to black and white
 		}
 
-	}
+	} 
 
 	return 0;
 }
