@@ -254,7 +254,7 @@ void Animals::Kill()
 	Sleep(150);
 	cout << "\n Amazing. Simply Amazing.\n\n Sounds Like She Is Happy, Take Her For A Walk...\n"
 		 << "\n As You Take Charlize For A Walk, She Gets Scared...\n"
-		 << " A Mouse Was On The Road. She Ran Away, Chase Her!\n";
+		 << " A Mouse Was On The Road. She Ran Away, Chase Her!\n\n\t\t Please Push Enter To Chase.";
 	
 	//Must push enter 6 times, for loop for getting a value (enter key)
 	for (int i = 0; i < 3; ++i)
@@ -291,9 +291,8 @@ void Animals::Kill()
 		 << " As You Walk To Her Cage, She Instantly Recongizes You.\n"
 		 << " As She Strolls Towards You A Smile Spreads Across Your Face,\n"
 		 << " You Waited Years For This To Happen, You Have Missed Her...\n";
-	cout << "\n\n Press Enter To Continue...";
-	cin.ignore();
-	cin.get();
+	cout << "\n\n To Be Continued...";
+	Sleep(15000);
 
 
 	PassTime();
@@ -493,7 +492,7 @@ void Animals::Nap()
 	cout << "\n\n Amazingly, She Has Awoken! Great!\n";
 	cout << " Everyday, She Needs 16 Hours Of Sleep, So Make Sure You Come Back!\n";
 	cout << " If You Don't She Will Cry And Run Away!\n";
-	cin.get();
+	Sleep(600);
 
 	PassTime(); // further passes time, so numbers will not add up. It will subtract then add
 }
@@ -541,11 +540,11 @@ void Animals::Train(int iq)
 		PassTime(); // further pushes time
 
 	}
-
+	
 	// must be outside while loop
 	cout << "\n\n Amazing! Charlize Has Learned So Much! Come Back Again.\n\n";
-	cin.get();
 	
+	Sleep(1000);
 		
 }
 
@@ -616,7 +615,7 @@ void Animals::Welcome()
 			cout << "\n Sleep Level Is A " << GetSleep() << " Out of 15." << endl;
 			cout << "\n Stress Level Is A " << GetStress() << " Out of 20.\n\n\n";
 			
-			cout << "\n\n\t\t Please Read The Above.\n\n";
+			cout << "\n\n\t\t Please Read The Above. Please Wait...\n\n";
 			break; // from break, it sends straight to the main
 
 		case 2:
@@ -633,7 +632,7 @@ void Animals::Welcome()
 			cout << "\n Sleep Level Is A " << GetSleep() << " Out of 15." << endl;
 			cout << "\n Stress Level Is A " << GetStress() << " Out of 20.\n\n\n";
 			
-			cout << "\n\n\t\t Please Read The Above.\n\n";
+			cout << "\n\n\t\t Please Read The Above. Please Wait...\n\n";
 			break; // from break, it sends straight to the main
 
 		case 3:
@@ -649,7 +648,7 @@ void Animals::Welcome()
 			cout << "\n Sleep Level Is A " << GetSleep() << " Out of 15." << endl;
 			cout << "\n Stress Level Is A " << GetStress() << " Out of 20.\n\n\n";
 			
-			cout << "\n\n\t\t Please Read The Above.\n\n";
+			cout << "\n\n\t\t Please Read The Above. Please Wait...\n\n";
 			break; // from break, it sends straight to the main
 
 		default:
