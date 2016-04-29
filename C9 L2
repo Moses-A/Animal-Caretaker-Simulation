@@ -1,0 +1,152 @@
+//Friend Elephant
+//Demonstrates friend functions and operator overloading
+//Author is Moses Arocha
+
+#include <iostream>
+#include <windows.h>
+#include <string>
+#include <algorithm>
+#include <stdio.h>
+#include <ctype.h>
+#include <vector>
+#include <cstdlib>
+#include <ctime>
+#include <fstream>
+#include <sstream>
+
+using namespace std;
+
+WORD GetConsoleTextAttribute (HANDLE hCon)
+{
+  CONSOLE_SCREEN_BUFFER_INFO con_info;
+  GetConsoleScreenBufferInfo(hCon, &con_info);
+  return con_info.wAttributes;
+}
+
+HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+const int saved_colors = GetConsoleTextAttribute(hConsole);
+
+
+class Elephant
+{
+    //make following global functions friends of the Elephant class
+    friend void Peek(const Elephant& aElephant);
+    friend ostream& operator<<(ostream& os, const Elephant& aElephant);	
+    
+public:
+    Elephant(string& name, string& hobbies, float& age, float& height, float& weight);
+    void RandomNumber();
+
+private:
+    string m_Name;
+	string m_Hobbies;
+	float m_Age;
+	float m_Height;
+	float m_Weight;
+};
+
+Elephant::Elephant(string& name, string& hobbies, float& age, float& height, float& weight):
+    m_Name(name),
+	m_Hobbies(hobbies),
+	m_Age(age),
+	m_Height(height),
+	m_Weight(weight)
+{}
+
+void Peek(const Elephant& aElephant);
+ostream& operator<<(ostream& os, const Elephant& aElephant);
+
+void Elephant::RandomNumber()
+{
+	srand(static_cast<unsigned int>(time(0)));  //seed random number generator
+	 float Random = rand() % 5000 + 100;         // random number between 100 and 5000
+	 m_Age = Random;
+	 m_Height = Random;
+	 m_Weight = Random;
+
+}
+
+int main(float Random)
+{
+	string ElephantName = "Charlize";
+	string ElephantHobbies = "Sleeping";
+	float ElephantAge = Random;
+	float ElephantHeight = Random;
+	float ElephantWeight = Random;
+
+	Elephant eleph(ElephantName, ElephantHobbies, ElephantAge, ElephantHeight, ElephantWeight);
+	
+	SetConsoleTextAttribute(hConsole, 0x08); // Sets The Color To Gray
+
+	cout << "\t\t Welcome To The Wonderful Safari!\n "
+		 << "  We Are Glad You Are Here. You're Here To See The Elephants Right?\n"
+		 << "\n\t\tPlease Wait As Game Loads....\n\n\n" << endl;
+	Sleep(3000);
+	
+	cout << "\n Sounds Great! Here Is The First Elephant. She Appears To Be A Pregnant Female."
+		 << "\n What Do You Want To Name Her?: ";
+	getline(cin, ElephantName);
+
+	cout << "\n\n What A Wonderful Name! Hey? Why Don't We Play A Little Game?\n\n";
+	cout << "\n (Push Enter To Continue)\n\n";
+	cin.ignore();
+	cout << "\t Whoever Can Correctly Guess The Hobbies, Age, Height,\n\t and Weight Of Her Can Keep Her.\n";
+	cout << "\n\t Do You Want To Play? Yes! Alright Great!\n\n";
+
+	cout << " What Is " << ElephantName << "'s Hobby? ";
+	getline(cin, ElephantHobbies);
+
+	cout << " What Is " << ElephantName << "'s Age? ";
+	cin >> ElephantAge;
+
+		while(!(cin >> ElephantAge))
+		{
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max_digits10, '\n');
+			cout << " This Is An Invalid Input: ";
+		}
+
+	cout << " What Is " << ElephantName << "'s Height? ";
+	cin >> ElephantHeight;
+
+		while(!(cin >> ElephantHeight))
+		{
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max_digits10, '\n');
+			cout << " This Is An Invalid Input: ";
+		}
+   
+	cout << " What Is " << ElephantWeight << "'s Weight? ";
+	cin >> ElephantWeight;
+
+		while(!(cin >> ElephantWeight))
+		{
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max_digits10, '\n');
+			cout << " This Is An Invalid Input: ";
+		}
+
+
+    cout << "Calling Peek() to access eleph's private data member, m_Name: \n";
+   // Peek(eleph);
+    
+    cout << "\nSending eleph object to cout with the << operator:\n";
+    cout << eleph;
+    
+    return 0;
+}
+
+//global friend function which can access all of a Elephant object's members
+void Peek(const Elephant& aElephant)
+{
+    cout << aElephant.m_Name << endl;
+}
+
+//global friend function which can access all of Elephant object's members
+//overloads the << operator so you can send a Elephant object to cout
+ostream& operator<<(ostream& os, const Elephant& aElephant)
+{
+    os << "Elephant Object - ";
+    os << "m_Name: " << aElephant.m_Name;
+    return os;
+}
