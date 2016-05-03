@@ -34,7 +34,7 @@ class Elephant
     friend ostream& operator<<(ostream& os, const Elephant& aElephant);	
     
 public:
-    Elephant(string& name, string& hobbies, int& age, int& height, int& weight);
+    Elephant(const string& Name, string& Hobbies, int& Age, int& Height, int& Weight);
 
 
 private:
@@ -45,12 +45,12 @@ private:
 	int m_Weight;
 };
 
-Elephant::Elephant(string& name, string& hobbies, int& age, int& height, int& weight):
-    m_Name(name),
-	m_Hobbies(hobbies),
-	m_Age(age),
-	m_Height(height),
-	m_Weight(weight)
+Elephant::Elephant(const string& Name, string& Hobbies, int& Age, int& Height, int& Weight):
+    m_Name(Name),
+	m_Hobbies(Hobbies),
+	m_Age(Age),
+	m_Height(Height),
+	m_Weight(Weight)
 {}
 
 void Peek(const Elephant& aElephant);
@@ -66,9 +66,9 @@ int main()
 	int ElephantHeight;
 	int ElephantWeight;
 
-	Elephant eleph(ElephantName, ElephantHobbies, ElephantAge, ElephantHeight, ElephantWeight);
 	
-	SetConsoleTextAttribute(hConsole, 0x08); // Sets The Color To Gray
+	
+  SetConsoleTextAttribute(hConsole, 0x08); // Sets The Color To Gray
 
 	cout << "\t\t Welcome To The Wonderful Safari!\n "
 		 << "  We Are Glad You Are Here. You're Here To See The Elephants Right?\n"
@@ -118,7 +118,7 @@ int main()
 			cout << " This Is An Invalid Input: ";
 		}
 
-
+Elephant eleph(ElephantName, ElephantHobbies, ElephantAge, ElephantHeight, ElephantWeight);
 
     cout << "\n Calling Peek() to access eleph's private data member:\n m_Name, m_Hobbies, m_Age, m_Height, m_Weight \n";
 	Peek(eleph);
@@ -132,22 +132,22 @@ int main()
 //global friend function which can access all of a Elephant object's members
 void Peek(const Elephant& aElephant)
 {
-    cout << aElephant.m_Name << endl;
-	cout << aElephant.m_Hobbies << endl;
-	cout << aElephant.m_Age << endl;
-	cout << aElephant.m_Height << endl;
-	cout << aElephant.m_Weight << endl;
+    cout << aElephant.m_Name << ", \n";
+	cout << aElephant.m_Hobbies << ", \n";
+	cout << aElephant.m_Age << ", \n";
+	cout << aElephant.m_Height << ", \n";
+	cout << aElephant.m_Weight << " \n";
 }
 
 //global friend function which can access all of Elephant object's members
 //overloads the << operator so you can send a Elephant object to cout
 ostream& operator<<(ostream& os, const Elephant& aElephant)
 {
-    os << "Elephant Object - ";
-    os << "m_Name: " << aElephant.m_Name;
-	os << "m_Hobbies:" << aElephant.m_Hobbies;
-	os << "m_Age:" << aElephant.m_Age;
-	os << "m_Height:" << aElephant.m_Height;
-	os << "m_Weight:" << aElephant.m_Weight;
+    os << "Elephant's Object - ";
+    os << "m_Name: " << aElephant.m_Name << endl;
+	os << "m_Hobbies:" << aElephant.m_Hobbies << endl;
+	os << "m_Age:" << aElephant.m_Age << endl;
+	os << "m_Height:" << aElephant.m_Height << endl;
+	os << "m_Weight:" << aElephant.m_Weight << endl;
     return os;
 }
