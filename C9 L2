@@ -89,29 +89,28 @@ int main()
 	getline(cin, ElephantHobbies);
 
 	cout << " What Is " << ElephantName << "'s Age? ";
-	cin >> ElephantAge;
 
-	while(cin.fail())
+	while(!(cin >> ElephantAge))
 		{
 			cin.clear();
 			cin.ignore(numeric_limits<streamsize>::max_digits10, '\n');
 			cout << " This Is An Invalid Input: ";
 		}
 
-	cout << " What Is " << ElephantName << "'s Height? ";
-	cin >> ElephantHeight;
+	cin.ignore();
+	cout << " What Is " << ElephantName << "'s Height? (In Feet): ";
 
-		while(cin.fail())
+		while(!(cin >> ElephantHeight))
 		{
 			cin.clear();
 			cin.ignore(numeric_limits<streamsize>::max_digits10, '\n');
 			cout << " This Is An Invalid Input: ";
 		}
-   
-	cout << " What Is " << ElephantName << "'s Weight? ";
-	cin >> ElephantWeight;
 
-		while(cin.fail())
+   cin.ignore();
+	cout << " What Is " << ElephantName << "'s Weight? (In Lbs): ";
+
+		while(!(cin >> ElephantWeight))
 		{
 			cin.clear();
 			cin.ignore(numeric_limits<streamsize>::max_digits10, '\n');
@@ -143,7 +142,7 @@ void Peek(const Elephant& aElephant)
 //overloads the << operator so you can send a Elephant object to cout
 ostream& operator<<(ostream& os, const Elephant& aElephant)
 {
-    os << "Elephant's Object - ";
+    os << "Elephant's Object - \n";
     os << "m_Name: " << aElephant.m_Name << endl;
 	os << "m_Hobbies:" << aElephant.m_Hobbies << endl;
 	os << "m_Age:" << aElephant.m_Age << endl;
