@@ -24,16 +24,16 @@ public:
     
 private:
     int m_Hunger;
-	int m_Mood;
-	int m_Health;
+    int m_Mood;
+    int m_Health;
 };
 
 int Animals::s_Total = 0;   //static member variable initialization
 
 Animals::Animals(int hunger, int mood, int health): 
     m_Hunger(hunger),
-	m_Mood(mood),
-	m_Health(health)
+    m_Mood(mood),
+    m_Health(health)
 {
     cout << "A New Aminal Has Been Added To The Safari!" << endl;
     ++s_Total;
@@ -113,7 +113,7 @@ int main()
 	getline(cin, userInput);
 
 	cout << "\n Great! A New Shippment Has Just Arrived From Western Africa.\n"
-		 << " It Seems To Be A Rather Large Box. \n\n";
+             << " It Seems To Be A Rather Large Box. \n\n";
 
 	Animals anim1(1,2,9), anim2(4,5,9), anim3(7,8,9);
 
@@ -121,13 +121,14 @@ int main()
 	cout << " All Three Animals Are " << userInput << " Like You Requested.\n";
 	cout << " Let Us Define The Characteristics Of Them.\n"
 		 << " Look Over Here. The First Animal's Name Tag Says Charlize.\n";
+		 
 	cout << " Let's Define Charlize's Characteristics.\n"
 		 << " What Is Her Hunger Level? [1-10] " ;
 	cin >> hunger;
 	anim1.SetHunger(hunger);
 	cout << " Great! Now, Let Us Define Her Stress Level? [1-10] ";
 	cin >> mood;
-	anim1.SetMood(mood);
+	anim1.SetMood(mood); // sets the animals mood to the number given
 
 	cout << " Awesome, Well She Is Young, So Her Health Will Be? [1-10] ";
 	cin >> health;
