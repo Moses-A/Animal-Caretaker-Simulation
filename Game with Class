@@ -202,19 +202,22 @@ void Animals::Kill()
 
 	if (mood > 15)
 	{
-        WordMood = "Happy";
+        	WordMood = "Happy";
 	}
+	
 	else if (mood > 10)
 	{
-        WordMood = "Tired";
+        	WordMood = "Tired";
 	}
+	
     else if (mood > 5)
 	{
-        WordMood = "Stressed";
+		WordMood = "Stressed";
 	}
+	
     else
 	{
-        WordMood = "Excited";
+        	WordMood = "Excited";
 	}
 	
 	//Beginning of what users will see with display
@@ -259,8 +262,8 @@ void Animals::Kill()
 	//Must push enter 6 times, for loop for getting a value (enter key)
 	for (int i = 0; i < 3; ++i)
 		{
-		cin.ignore();
-		cin.get();
+			cin.ignore();
+			cin.get();
 		}
 
 	cout << "\n Oh Thank Goodness, You Caught Her! Please, Walk Her Back.\n"
@@ -309,6 +312,7 @@ void Animals::Eat(int food)
 	{
 		m_Hunger = 0;
 	}
+	
 	else if (m_Hunger > 10)
 	{
 		m_Hunger = 10;
@@ -349,10 +353,12 @@ void Animals::Speak(int Random)
 
 	// an if statement that states that m_Health cannot go over 100, or decrease below 0
 	m_Health = m_Health + 10;
+	
 	if (m_Health < 0)
 	{
 		m_Health = 0;
 	}
+	
 	else if (m_Health > 100)
 	{
 		m_Health = 100;
@@ -361,19 +367,22 @@ void Animals::Speak(int Random)
 	// an if statement that defines from the random function to define mood for this FUNCTION ONLY
 	if (MoodNum > 15)
 	{
-        mood = "Fustrated";
+        	mood = "Fustrated";
 	}
-    else if (MoodNum > 10)
+	
+	else if (MoodNum > 10)
 	{
-        mood = "Happy";
+        	mood = "Happy";
 	}
-    else if (MoodNum > 5)
+	
+        else if (MoodNum > 5)
 	{
-        mood = "Depressed";
+        	mood = "Depressed";
 	}
-    else
+	
+        else
 	{
-        mood = "Cheerful";
+		mood = "Cheerful";
 	}
 
 	// beginning of what users will see
@@ -390,6 +399,7 @@ void Animals::Speak(int Random)
 	{
 		cout << "\n I Would Love To Talk About That!\n";
 	}
+	
 	else
 	{
 		cout << "\n Ehh, Alright I Guess. K.\n";
@@ -484,9 +494,9 @@ void Animals::Nap()
 	//for loop to allow user to allow animal to sleep
 	for (int i = 0; i < 16; ++i)
 		{
-		++hours;
-		cin.get();
-		cout << "\t" << hours <<" Hours Has Gone By...\n";
+			++hours;
+			cin.get();
+			cout << "\t" << hours <<" Hours Has Gone By...\n";
 		}
 
 	cout << "\n\n Amazingly, She Has Awoken! Great!\n";
@@ -521,6 +531,7 @@ void Animals::Train(int iq)
 			m_Intelligence += iq; // only place it increases iq
 			Tricks.push_back(trick);
 		}
+		
 		else
 		{
 			cin.ignore();
@@ -563,14 +574,17 @@ void Animals::Welcome()
 	{
 		cout << "\n\t Great! You Will Be A Nice CareTaker!\n";
 	}
+	
 	else if (type.length() > 4)
 	{
 		cout << "\n\t I Hope Everything Turns Out Well...\n";
 	}
+	
 	else if (type == "EVIL" || type == "evil" || type == "Evil")
 	{
 		cout << "\n\t This Does Not Seem Like A Great Sign...\n";
 	}
+	
 	else // catch all for this function
 	{
 		cout << "\n\t You Chose Wrong. You Get To Be Nice!\n";
