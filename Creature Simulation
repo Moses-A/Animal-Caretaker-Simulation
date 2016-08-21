@@ -36,7 +36,6 @@ class Elephant
 public:
     Elephant(const string& Name, string& Hobbies, int& Age, int& Height, int& Weight);
 
-
 private:
     string m_Name;
 	string m_Hobbies;
