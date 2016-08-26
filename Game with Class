@@ -76,9 +76,7 @@ Animals::Animals(int hunger, int boredom, int health, int stress, int sleep, int
  int Animals::GetMood(int Random)
 {
 	srand(static_cast<unsigned int>(time(0)));  //seed random number generator
-
 	 Random = rand() % 20 + 1;         // random number between 1 and 10
-	
 	 return (Random);
 }
 
@@ -210,12 +208,12 @@ void Animals::Kill()
         	WordMood = "Tired";
 	}
 	
-    else if (mood > 5)
+         else if (mood > 5)
 	{
 		WordMood = "Stressed";
 	}
 	
-    else
+         else
 	{
         	WordMood = "Excited";
 	}
@@ -238,16 +236,16 @@ void Animals::Kill()
 
 	//place where variable string WordMood comes into place
 	cout << "\n Here! Take This! It's A Tranquilizer. Approach Charlize Slowly!\n"
-		 << " She Seems Very " << WordMood << " Oh No!...\n\n ";
+	     << " She Seems Very " << WordMood << " Oh No!...\n\n ";
 	Sleep(1550);
 	cout << " Shoot Her With It Already!\n"
-		 << "\t Press Enter To Shoot Charlize.\n";
+	     << "\t Press Enter To Shoot Charlize.\n";
 	
 	cin.ignore();
 	cin.get();
 
 	cout << "\n\t Okay Great. She Is Safe Now, Please Pet Her.\n"
-		<< "\t\t Press Enter To Pet Charlize.\n";
+	     << "\t\t Press Enter To Pet Charlize.\n";
 	cin.ignore();
 	cin.get();
 
@@ -256,20 +254,20 @@ void Animals::Kill()
 
 	Sleep(150);
 	cout << "\n Amazing. Simply Amazing.\n\n Sounds Like She Is Happy, Take Her For A Walk...\n"
-		 << "\n As You Take Charlize For A Walk, She Gets Scared...\n"
-		 << " A Mouse Was On The Road. She Ran Away, Chase Her!\n\n\t\t Please Push Enter To Chase.";
+	     << "\n As You Take Charlize For A Walk, She Gets Scared...\n"
+	     << " A Mouse Was On The Road. She Ran Away, Chase Her!\n\n\t\t Please Push Enter To Chase.";
 	
 	//Must push enter 6 times, for loop for getting a value (enter key)
 	for (int i = 0; i < 3; ++i)
-		{
-			cin.ignore();
-			cin.get();
-		}
+	{
+		cin.ignore();
+		cin.get();
+	}
 
 	cout << "\n Oh Thank Goodness, You Caught Her! Please, Walk Her Back.\n"
-		 << "\n As You Walked Her Back To The Zoo, She Gets Tired.\n"
-		 << "\n She Decides To Sit Down. Please, Take Her Back To The Zoo Now.\n";
-	cout << " Please Type Walk To Walk Back To The Zoo. ";
+	     << "\n As You Walked Her Back To The Zoo, She Gets Tired.\n"
+	     << "\n She Decides To Sit Down. Please, Take Her Back To The Zoo Now.\n"
+	     << " Please Type Walk To Walk Back To The Zoo. ";
 	cin >> Walk; // walk also does not mattter, this is why there is not getline
 
 	PassTime(); // passes time further
@@ -280,23 +278,22 @@ void Animals::Kill()
 
 
 	cout << "\t 'Hey, I'm Charlize.' - Charlize The Animals\n"
-		 << " Scared You Run Away And Never Come Back.\n\n";
+	     << " Scared You Run Away And Never Come Back.\n\n";
 	Sleep(1550);
 
 
 	cout << " To This Day You Wonder What Ever Happend To Charlize...\n\n"
-		 << " Today Is The Day You Are Going To Visit Her, After 15 Years.\n"
-		 << " Nervous, You Stumble Through The Zoo Towards Her Cage...\n\n";
+	     << " Today Is The Day You Are Going To Visit Her, After 15 Years.\n"
+	     << " Nervous, You Stumble Through The Zoo Towards Her Cage...\n\n";
 	Sleep(1550);
 
 	//Last bit, requires users to push enter to continue so break doesn't inact in main
 	cout << " It's Not The Same As You Remember, You Wish You Hadn't Left.\n"
-		 << " As You Walk To Her Cage, She Instantly Recongizes You.\n"
-		 << " As She Strolls Towards You A Smile Spreads Across Your Face,\n"
-		 << " You Waited Years For This To Happen, You Have Missed Her...\n";
-	cout << "\n\n To Be Continued...";
+	     << " As You Walk To Her Cage, She Instantly Recongizes You.\n"
+	     << " As She Strolls Towards You A Smile Spreads Across Your Face,\n"
+	     << " You Waited Years For This To Happen, You Have Missed Her...\n"
+	     << "\n\n To Be Continued...";
 	Sleep(15000);
-
 
 	PassTime();
 
@@ -319,8 +316,8 @@ void Animals::Eat(int food)
 	}
 
 	cout << "\n\n As You Walk Over To Charlize, She Seems Hungry. So You Give Her Some Food.\n"
-		 << " She Thanks You By Letting You Touch Her Trunk.\n"
-		 << " Would You Like To Feed Her Again? [Y/N] ";
+	     << " She Thanks You By Letting You Touch Her Trunk.\n"
+	     << " Would You Like To Feed Her Again? [Y/N] ";
 	cin >> Feed;
 
 	//toupper must be a char variable, dont change to string
@@ -341,7 +338,6 @@ void Animals::Eat(int food)
 	cin.get();
 
 	PassTime();
-
 
 }
 
@@ -411,7 +407,6 @@ void Animals::Speak(int Random)
 	cout << " \n\t Well I Have To Leave Now, So Goodbye!\n\n";
 		 
 	cin.get();
-
 
 	PassTime(); // further passes time
 
@@ -565,8 +560,8 @@ void Animals::Welcome()
 	int level = 1; // used for users to choose what level they want to play at
 
 	cout << " From Moses Arocha, \n To Matthew,\n\n Greetings! \n\n I Hope You Are Having A Wonderful Day. I Am Glad To See You Back.\n"
-		 << " I Know, It's Been A While. Well, To Begin, This Is Charlize.\n"
-		 << " Here You Will Be The CareTaker. What Type Of CareTaker Would You Like To Be?\n";
+	     << " I Know, It's Been A While. Well, To Begin, This Is Charlize.\n"
+	     << " Here You Will Be The CareTaker. What Type Of CareTaker Would You Like To Be?\n";
 	cout << "\n Please Insert One Of The Three Below: [Nice, Magical, Evil] ";
 	getline(cin, type); // string does define which choice, else created
 
@@ -597,20 +592,16 @@ void Animals::Welcome()
 	cout << " 2 - Medium\n";
 	cout << " 3 - Veteran\n";
 
-
 	cout << "\n\t\tWhat Would You Like To Do? : ";
-		cin >> level;
+	cin >> level;
 
-		if ((!cin) || ((cin !=0) &&
-					(level != 1) && (level != 2) &&
-				    (level != 3) ))
-				{
-					level = 0;
-					cout << "\n You Have Lost The Game Already, Great. \n";
-					cin.ignore();
-					cin.get();
-				}
-
+		if ((!cin) || ((cin !=0) && (level != 1) && (level != 2) && (level != 3) ))
+		{
+			level = 0;
+			cout << "\n You Have Lost The Game Already, Great. \n";
+			cin.ignore();
+			cin.get();
+		}
 
 		switch (level) // level is defined in the previous line from user-input
 		{
@@ -634,9 +625,9 @@ void Animals::Welcome()
 
 		case 2:
 			cout << "\n\n Amazing! Moving Up In The World. The Rules Of The Game Are Simple.\n"
-				 << " Everyday, You Must Feed Charlize, Bath Her, And Let Her Sleep. It Is\n"
-				 << " It Is Recommended To Let Her Sleep And Relax.\n"
-				 << " Everyday The Statics Will Increase, Once They Reach The Max,\n\t\t Charlize Will Die.\n\n";
+			     << " Everyday, You Must Feed Charlize, Bath Her, And Let Her Sleep. It Is\n"
+			     << " It Is Recommended To Let Her Sleep And Relax.\n"
+			     << " Everyday The Statics Will Increase, Once They Reach The Max,\n\t\t Charlize Will Die.\n\n";
 			PassTime();
 
 			cout << "\n Boredom Level Is A " << GetBoredom() << " Out Of 10." << endl;
