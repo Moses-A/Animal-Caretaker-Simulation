@@ -34,7 +34,7 @@ Animals::Animals(int hunger, int mood, int health):
     m_Mood(mood),
     m_Health(health)
 {
-    cout << "A New Aminal Has Been Added To The Safari!" << endl;
+    cout << " A New Aminal Has Been Added To The Safari!" << endl;
     ++s_Total;
 }
 
